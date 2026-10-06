@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng 20/10</title>
+    <style>
+        body {
+            background-color: #ffe6e6; /* Màu nền hồng nhạt */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Ẩn thanh cuộn khi hoa rơi */
+        }
+        
+        .card {
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            z-index: 10;
+            animation: fadeIn 1.5s ease-out;
+            transition: transform 0.3s ease;
+            max-width: 400px;
+        }
+
+        .card:hover {
+            transform: scale(1.03); /* Phóng to nhẹ khi di chuột vào */
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        p {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Hiệu ứng nảy và mờ dần cho khung thiệp */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Lớp CSS cho các icon rơi xuống */
+        .falling-item {
+            position: absolute;
+            top: -10vh;
+            font-size: 24px;
+            animation: fall linear forwards;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nội dung thiệp -->
+    <div class="card">
+        <h1>Chúc mừng 20/10! 🌸</h1>
+        <p>Chúc mẹ luôn mạnh khỏe, vui vẻ và hạnh phúc mỗi ngày.<br><br>Cảm ơn vì những điều tuyệt vời nhất mẹ đã dành cho con!</p>
+    </div>
+
+    <!-- Script tạo hiệu ứng động -->
+    <script>
+        function createFallingItem() {
+            const item = document.createElement('div');
+            item.classList.add('falling-item');
+            
+            // Bạn có thể thay đổi icon ở đây (thêm tim ❤️, sao ⭐...)
+            const icons = ['🌸', '🌺', '💖', '✨'];
+            item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            
+            // Vị trí xuất hiện ngẫu nhiên theo chiều ngang
+            item.style.left = Math.random() * 100 + 'vw';
+            
+            // Tốc độ rơi ngẫu nhiên từ 3 đến 6 giây
+            item.style.animationDuration = Math.random() * 3 + 3 + 's';
+            
+            // Kích thước ngẫu nhiên
+            item.style.fontSize = Math.random() * 15 + 15 + 'px';
+
+            document.body.appendChild(item);
+
+            // Xóa phần tử sau khi rơi xong để không làm nặng trình duyệt
+            setTimeout(() => {
+                item.remove();
+            }, 6000);
+        }
+
+        // Cứ mỗi 400ms sẽ tạo ra một icon mới rơi xuống
+        setInterval(createFallingItem, 400);
+    </script>
+
+</body>
+</html>D
