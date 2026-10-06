@@ -17,7 +17,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 0 60px 0; /* Padding dưới để không bị thanh chạy chữ che */
+            padding: 20px 0 60px 0;
             box-sizing: border-box;
             font-family: 'MS Sans Serif', Tahoma, sans-serif;
             overflow-x: hidden;
@@ -214,14 +214,15 @@
             to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* THANH LỜI CHÚC CHẠY CHỮ NỔI BẬT Ở CHÂN MÀN HÌNH */
+        /* THANH LỜI CHÚC CHẠY CHỮ - BẮT ĐẦU ẨN (DISPLAY: NONE) */
         .bottom-ticker-bar {
+            display: none; /* Mặc định ẩn lúc mới mở trang */
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #e6005c; /* Màu hồng neon rực rỡ */
-            border-top: 3px solid #ffcc00; /* Viền vàng nổi bật */
+            background: #e6005c;
+            border-top: 3px solid #ffcc00;
             color: #ffffff;
             padding: 10px 0;
             font-size: 16px;
@@ -282,8 +283,8 @@
         </div>
     </div>
 
-    <!-- THANH NGHỆ THUẬT CHẠY CHỮ QUẢNG CÁO NỔI BẬT -->
-    <div class="bottom-ticker-bar">
+    <!-- THANH CHẠY CHỮ QUẢNG CÁO (SẼ HIỆN KHI BẤM YASS) -->
+    <div class="bottom-ticker-bar" id="tickerBar">
         <div class="ticker-content">
             🌸 Gửi các bạn nữ trước màn hình — Nhân ngày 20/10, Phương chúc bạn luôn vui vẻ, xinh đẹp, học hành thuận lợi và gặp nhiều may mắn nhé! Chúc bạn có một ngày 20/10 thật vui và nhận được thật nhiều quà. Happy Women’s Day! 🎉✨💖
         </div>
@@ -330,6 +331,9 @@
                 
                 // Hiện trình phát nhạc Spotify & QR
                 document.getElementById('spotifyBox').style.display = 'block';
+
+                // HIỆN THANH LỜI CHÚC CHẠY CHỮ DƯỚI MÀN HÌNH
+                document.getElementById('tickerBar').style.display = 'block';
 
                 // Đổi nút bấm thành [ Hoàn tất ]
                 const btn = document.getElementById('actionBtn');
