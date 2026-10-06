@@ -115,4 +115,106 @@
             border-right: 2px solid #000000;
             border-bottom: 2px solid #000000;
             padding: 8px 35px;
-            font
+            font-family: 'MS Sans Serif', Tahoma, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:active {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .falling-item {
+            position: absolute;
+            top: -10vh;
+            font-size: 24px;
+            animation: fall linear forwards;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cửa sổ hệ điều hành -->
+    <div class="win-window" id="mainWindow">
+        <div class="title-bar">
+            <span id="windowTitle">⚠️ C:\WIN999\SYSTEM_ALERT.EXE</span>
+            <div class="close-btn" onclick="fakeError()">X</div>
+        </div>
+        <div class="content">
+            <div class="icon" id="windowIcon">⚠️</div>
+            <div class="message" id="windowMessage">
+                <strong>LỖI HỆ THỐNG NGHIÊM TRỌNG!</strong><br><br>
+                Hệ điều hành <i>Win999</i> phát hiện <b> unknown user </b> đang sử dụng thiết bị này.<br><br>
+                Yêu cầu nhận ngay lời chúc 20/10 để khôi phục! 
+            </div>
+        </div>
+        <div class="btn-container">
+            <button id="actionBtn" onclick="fakeError()">[ Yass ]</button>
+        </div>
+    </div>
+
+    <script>
+        let isActivated = false; // Biến cờ để ngăn người dùng bấm nhiều lần
+
+        function createFallingItem() {
+            const item = document.createElement('div');
+            item.classList.add('falling-item');
+            
+            // Chỉ thả các icon vui nhộn, hoa, tim
+            const icons = ['🌸', '🌺', '💖', '✨', '💌', '🎉'];
+            item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = Math.random() * 3 + 3 + 's';
+            item.style.fontSize = Math.random() * 15 + 15 + 'px';
+
+            document.body.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, 6000);
+        }
+
+        function fakeError() {
+            // Nếu đã kích hoạt rồi thì không làm lại nữa
+            if (isActivated) return;
+            isActivated = true;
+
+            // 1. Kích hoạt class làm đổi màu nền sang vui tươi
+            document.body.classList.add('happy-mode');
+
+            // 2. Dùng setTimeout để giao diện kịp chuyển màu TRƯỚC KHI hiện Alert
+            setTimeout(() => {
+                alert("Tiến trình cài đặt đã đạt 100%.\nChúc 20/10 vui vẻ :P");
+                
+                // 3. Sau khi tắt hộp thoại Alert, bắt đầu thả hoa rơi liên tục
+                setInterval(createFallingItem, 150);
+
+                // 4. Biến đổi nội dung cửa sổ thành một lời chào dễ thương
+                document.getElementById('windowTitle').innerText = "💖 C:\\WIN999\\HAPPINESS.EXE";
+                document.getElementById('windowIcon').innerText = "🌸";
+                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!</strong><br><br>Gửi đến <b>unknown user</b> ngàn nụ hoa và sự vui vẻ.<br><br>Chúc mừng 20/10 nha! 🎉";
+                
+                // Đổi nút bấm thành nút Đóng
+                const btn = document.getElementById('actionBtn');
+                btn.innerText = "[ Hoàn tất ]";
+                btn.onclick = function() {
+                    document.getElementById('mainWindow').style.display = 'none'; // Tắt hẳn cửa sổ
+                };
+            }, 300); // Đợi 300ms rồi mới hiện thông báo
+        }
+    </script>
+
+</body>
+</html>
