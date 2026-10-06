@@ -3,109 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc mừng 20/10</title>
+    <title>Hệ điều hành Win999 - Lỗi 20/10</title>
     <style>
         body {
-            background-color: #ffe6e6; /* Màu nền hồng nhạt */
+            /* Nền xanh pastel kết hợp họa tiết chấm bi cho đỡ trống */
+            background-color: #dbe9f4; 
+            background-image: radial-gradient(#a3c2db 3px, transparent 3px);
+            background-size: 30px 30px;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Ẩn thanh cuộn khi hoa rơi */
+            font-family: 'MS Sans Serif', Tahoma, sans-serif;
+            overflow: hidden;
         }
-        
-        .card {
-            background: white;
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-            text-align: center;
+
+        /* Giao diện cửa sổ retro Win999 */
+        .win-window {
+            background: #c0c0c0;
+            border-top: 3px solid #ffffff;
+            border-left: 3px solid #ffffff;
+            border-right: 3px solid #000000;
+            border-bottom: 3px solid #000000;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
             z-index: 10;
-            animation: fadeIn 1.5s ease-out;
-            transition: transform 0.3s ease;
-            max-width: 400px;
+            animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .card:hover {
-            transform: scale(1.03); /* Phóng to nhẹ khi di chuột vào */
-            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        @keyframes popUp {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
         }
 
-        h1 {
-            color: #ff4d6d;
-            margin-bottom: 15px;
-            font-size: 28px;
+        /* Thanh tiêu đề cửa sổ */
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            padding: 5px 8px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        p {
-            color: #555;
-            font-size: 18px;
+        /* Nút X đóng cửa sổ */
+        .close-btn {
+            background: #c0c0c0;
+            color: black;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+            line-height: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:active {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        /* Nội dung cảnh báo */
+        .content {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .icon {
+            font-size: 50px;
+        }
+
+        .message {
+            font-size: 16px;
             line-height: 1.6;
+            color: #000;
         }
 
-        /* Hiệu ứng nảy và mờ dần cho khung thiệp */
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* Nút bấm retro */
+        .btn-container {
+            text-align: center;
+            padding-bottom: 20px;
         }
 
-        /* Lớp CSS cho các icon rơi xuống */
+        button {
+            background: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            padding: 8px 35px;
+            font-family: 'MS Sans Serif', Tahoma, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:active {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        /* Hiệu ứng rơi */
         .falling-item {
             position: absolute;
             top: -10vh;
             font-size: 24px;
             animation: fall linear forwards;
             z-index: 1;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-            }
+            to { transform: translateY(110vh) rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Nội dung thiệp -->
-    <div class="card">
-        <h1>Chúc mừng 20/10! 🌸</h1>
-        <p>Chúc mẹ luôn mạnh khỏe, vui vẻ và hạnh phúc mỗi ngày.<br><br>Cảm ơn vì những điều tuyệt vời nhất mẹ đã dành cho con!</p>
+    <!-- Cửa sổ hệ điều hành -->
+    <div class="win-window">
+        <div class="title-bar">
+            <span>⚠️ C:\WIN999\SYSTEM_ALERT.EXE</span>
+            <div class="close-btn" onclick="fakeError()">X</div>
+        </div>
+        <div class="content">
+            <!-- Icon cảnh báo -->
+            <div class="icon">⚠️</div>
+            <div class="message">
+                <strong>LỖI HỆ THỐNG NGHIÊM TRỌNG!</strong><br><br>
+                Hệ điều hành <i>Win999</i> phát hiện <b> unknown user </b> đang sử dụng thiết bị này.<br><br>
+                Yêu cầu nhận ngay lời chúc 20/10 để khôi phục! 
+            </div>
+        </div>
+        <div class="btn-container">
+            <button onclick="fakeError()">[ Yass ]</button>
+        </div>
     </div>
 
-    <!-- Script tạo hiệu ứng động -->
     <script>
         function createFallingItem() {
             const item = document.createElement('div');
             item.classList.add('falling-item');
             
-            // Bạn có thể thay đổi icon ở đây (thêm tim ❤️, sao ⭐...)
-            const icons = ['🌸', '🌺', '💖', '✨'];
+            // Trộn lẫn hoa và các icon máy tính cổ điển cho đúng concept Win999
+            const icons = ['🌸', '🌺', '💾', '💖', '✨', '💻', '💌'];
             item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             
-            // Vị trí xuất hiện ngẫu nhiên theo chiều ngang
             item.style.left = Math.random() * 100 + 'vw';
-            
-            // Tốc độ rơi ngẫu nhiên từ 3 đến 6 giây
             item.style.animationDuration = Math.random() * 3 + 3 + 's';
-            
-            // Kích thước ngẫu nhiên
             item.style.fontSize = Math.random() * 15 + 15 + 'px';
 
             document.body.appendChild(item);
 
-            // Xóa phần tử sau khi rơi xong để không làm nặng trình duyệt
             setTimeout(() => {
                 item.remove();
             }, 6000);
         }
 
-        // Cứ mỗi 400ms sẽ tạo ra một icon mới rơi xuống
-        setInterval(createFallingItem, 400);
+        // Tạo cơn mưa icon rơi liên tục
+        setInterval(createFallingItem, 300);
+
+        // Hiệu ứng khi bấm vào nút OK hoặc nút X
+        function fakeError() {
+            alert("Tiến trình cài đặt đã đạt 100%.\nChúc 20/10 vui vẻ :P");
+            // Tăng tốc độ rơi của hoa sau khi bấm nút
+            setInterval(createFallingItem, 100);
+        }
     </script>
 
 </body>
-</html>D
+</html>
