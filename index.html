@@ -111,12 +111,12 @@
             color: #000;
         }
 
-        /* Khung nhạc Spotify Embed */
-        .spotify-container {
-            display: none;
+        /* Khung ảnh kiểu retro Win999 */
+        .gift-image-container {
+            display: none; /* Mặc định ẩn, hiện sau khi bấm nút */
             margin-top: 5px;
-            background: #a0a0a0;
-            padding: 8px;
+            background: #ffffff;
+            padding: 10px;
             border-top: 2px solid #000000;
             border-left: 2px solid #000000;
             border-right: 2px solid #ffffff;
@@ -124,54 +124,13 @@
             text-align: center;
         }
 
-        .spotify-title {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #000080;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .spotify-iframe {
-            width: 100%;
-            height: 152px;
-            border: none;
-            border-radius: 8px;
-        }
-
-        .qr-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 8px;
-            padding: 8px;
-            background: #ececec;
-            border: 1px dashed #808080;
-        }
-
-        .qr-img {
-            width: 75px;
-            height: 75px;
-            border: 1px solid #000;
-        }
-
-        .qr-text {
-            font-size: 12px;
-            color: #333;
-            text-align: left;
-        }
-
-        .spotify-link-btn {
-            display: inline-block;
-            margin-top: 4px;
-            color: #1DB954;
-            font-weight: bold;
-            text-decoration: underline;
-            font-size: 13px;
+        .gift-image {
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto;
         }
 
         .btn-container {
@@ -214,9 +173,9 @@
             to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* THANH LỜI CHÚC CHẠY CHỮ - BẮT ĐẦU ẨN (DISPLAY: NONE) */
+        /* THANH CHẠY CHỮ QUẢNG CÁO DƯỚI MÀN HÌNH */
         .bottom-ticker-bar {
-            display: none; /* Mặc định ẩn lúc mới mở trang */
+            display: none; /* Mặc định ẩn */
             position: fixed;
             bottom: 0;
             left: 0;
@@ -264,18 +223,9 @@
                 </div>
             </div>
 
-            <!-- Trình phát nhạc Spotify & Mã QR -->
-            <div class="spotify-container" id="spotifyBox">
-                <div class="spotify-title">🎵 WIN999 MEDIA PLAYER - BẢN NHẠC DÀNH TẶNG BẠN</div>
-                <iframe class="spotify-iframe" src="https://open.spotify.com/embed/track/6IHLOkgZftkcqS3fM0jMCT?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                
-                <div class="qr-section">
-                    <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://open.spotify.com/track/6IHLOkgZftkcqS3fM0jMCT" alt="Spotify QR Code">
-                    <div class="qr-text">
-                        <span>Quét mã QR hoặc bấm link dưới để mở bằng Spotify:</span><br>
-                        <a href="https://open.spotify.com/track/6IHLOkgZftkcqS3fM0jMCT" target="_blank" class="spotify-link-btn">🎧 Mở trong ứng dụng Spotify ↗</a>
-                    </div>
-                </div>
+            <!-- Khung hiển thị ảnh bé mèo cầm hoa -->
+            <div class="gift-image-container" id="imageBox">
+                <img src="cat.png" alt="Bé mèo tặng hoa" class="gift-image">
             </div>
         </div>
         <div class="btn-container">
@@ -283,7 +233,7 @@
         </div>
     </div>
 
-    <!-- THANH CHẠY CHỮ QUẢNG CÁO (SẼ HIỆN KHI BẤM YASS) -->
+    <!-- THANH CHẠY CHỮ DƯỚI MÀN HÌNH -->
     <div class="bottom-ticker-bar" id="tickerBar">
         <div class="ticker-content">
             🌸 Gửi các bạn nữ trước màn hình — Nhân ngày 20/10, Phương chúc bạn luôn vui vẻ, xinh đẹp, học hành thuận lợi và gặp nhiều may mắn nhé! Chúc bạn có một ngày 20/10 thật vui và nhận được thật nhiều quà. Happy Women’s Day! 🎉✨💖
@@ -297,7 +247,7 @@
             const item = document.createElement('div');
             item.classList.add('falling-item');
             
-            const icons = ['🌸', '🌺', '💖', '✨', '💌', '🎉', '🎵'];
+            const icons = ['🌸', '🌺', '💖', '✨', '💌', '🎉', '🐱'];
             item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             
             item.style.left = Math.random() * 100 + 'vw';
@@ -321,25 +271,25 @@
             setTimeout(() => {
                 alert("Tiến trình cài đặt đã đạt 100%.\nChúc 20/10 vui vẻ :P");
                 
-                // Thả hoa & nốt nhạc rơi liên tục
+                // Thả hoa & icon mèo rơi liên tục
                 setInterval(createFallingItem, 150);
 
                 // Cập nhật giao diện cửa sổ
                 document.getElementById('windowTitle').innerText = "💖 C:\\WIN999\\HAPPINESS.EXE";
                 document.getElementById('windowIcon').innerText = "🌸";
-                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!</strong><br><br>Gửi đến <b>unknown user</b> ngàn nụ hoa và giai điệu ngọt ngào dưới đây! 🎉";
+                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!</strong><br><br>Gửi đến <b>unknown user</b>:";
                 
-                // Hiện trình phát nhạc Spotify & QR
-                document.getElementById('spotifyBox').style.display = 'block';
+                // Hiển thị khung ảnh bé mèo
+                document.getElementById('imageBox').style.display = 'block';
 
-                // HIỆN THANH LỜI CHÚC CHẠY CHỮ DƯỚI MÀN HÌNH
+                // Hiển thị thanh lời chúc chạy chữ dưới màn hình
                 document.getElementById('tickerBar').style.display = 'block';
 
                 // Đổi nút bấm thành [ Hoàn tất ]
                 const btn = document.getElementById('actionBtn');
                 btn.innerText = "[ Hoàn tất ]";
                 
-                // Khi bấm Hoàn tất -> Ẩn cửa sổ chính để ngắm màn hình hoa rơi + dòng chữ chạy
+                // Bấm Hoàn tất -> Ẩn cửa sổ để ngắm hoa rơi & dòng chữ chạy
                 btn.onclick = function() {
                     document.getElementById('mainWindow').style.display = 'none';
                 };
