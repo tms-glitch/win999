@@ -111,12 +111,12 @@
             color: #000;
         }
 
-        /* Khung ảnh kiểu retro Win999 */
-        .gift-image-container {
+        /* Khung quà tặng chứa Ảnh + Mã QR Spotify */
+        .gift-container {
             display: none; /* Mặc định ẩn, hiện sau khi bấm nút */
             margin-top: 5px;
             background: #ffffff;
-            padding: 10px;
+            padding: 12px;
             border-top: 2px solid #000000;
             border-left: 2px solid #000000;
             border-right: 2px solid #ffffff;
@@ -126,11 +126,43 @@
 
         .gift-image {
             max-width: 100%;
-            max-height: 250px;
+            max-height: 220px;
             height: auto;
             border-radius: 6px;
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 12px auto;
+        }
+
+        .qr-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px;
+            background: #f4f4f4;
+            border: 1px dashed #808080;
+            border-radius: 4px;
+        }
+
+        .qr-img {
+            width: 75px;
+            height: 75px;
+            border: 1px solid #000;
+        }
+
+        .qr-text {
+            font-size: 12px;
+            color: #333;
+            text-align: left;
+        }
+
+        .spotify-link-btn {
+            display: inline-block;
+            margin-top: 5px;
+            color: #1DB954;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 13px;
         }
 
         .btn-container {
@@ -223,9 +255,19 @@
                 </div>
             </div>
 
-            <!-- Khung hiển thị ảnh bé mèo cầm hoa -->
-            <div class="gift-image-container" id="imageBox">
+            <!-- Khung hiển thị Ảnh + Mã QR Spotify -->
+            <div class="gift-container" id="giftBox">
+                <!-- Ảnh mèo tặng hoa -->
                 <img src="cat.png" alt="Bé mèo tặng hoa" class="gift-image">
+                
+                <!-- Phần mã QR & Link Spotify -->
+                <div class="qr-section">
+                    <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://open.spotify.com/track/6IHLOkgZftkcqS3fM0jMCT" alt="Spotify QR Code">
+                    <div class="qr-text">
+                        <span>Quét mã QR hoặc bấm link dưới để mở bài hát tặng bạn:</span><br>
+                        <a href="https://open.spotify.com/track/6IHLOkgZftkcqS3fM0jMCT" target="_blank" class="spotify-link-btn">🎧 Mở trong ứng dụng Spotify ↗</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="btn-container">
@@ -247,7 +289,7 @@
             const item = document.createElement('div');
             item.classList.add('falling-item');
             
-            const icons = ['🌸', '🌺', '💖', '✨', '💌', '🎉', '🐱'];
+            const icons = ['🌸', '🌺', '💖', '✨', '💌', '🎉', '🐱', '🎵'];
             item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             
             item.style.left = Math.random() * 100 + 'vw';
@@ -271,16 +313,16 @@
             setTimeout(() => {
                 alert("Tiến trình cài đặt đã đạt 100%.\nChúc 20/10 vui vẻ :P");
                 
-                // Thả hoa & icon mèo rơi liên tục
+                // Thả hoa, icon mèo & nốt nhạc rơi liên tục
                 setInterval(createFallingItem, 150);
 
                 // Cập nhật giao diện cửa sổ
                 document.getElementById('windowTitle').innerText = "💖 C:\\WIN999\\HAPPINESS.EXE";
                 document.getElementById('windowIcon').innerText = "🌸";
-                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!</strong><br><br>Gửi đến <b>unknown user</b>:";
+                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!</strong><br><br>Gửi đến <b>unknown user</b> ngàn nụ hoa và quà tặng xinh xắn dưới đây! 🎉";
                 
-                // Hiển thị khung ảnh bé mèo
-                document.getElementById('imageBox').style.display = 'block';
+                // Hiển thị khung quà (ảnh + QR)
+                document.getElementById('giftBox').style.display = 'block';
 
                 // Hiển thị thanh lời chúc chạy chữ dưới màn hình
                 document.getElementById('tickerBar').style.display = 'block';
