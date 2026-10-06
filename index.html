@@ -6,9 +6,11 @@
     <title>Hệ điều hành Win999 - Lỗi 20/10</title>
     <style>
         body {
-            /* Nền xanh pastel kết hợp họa tiết chấm bi cho đỡ trống */
-            background-color: #dbe9f4; 
-            background-image: radial-gradient(#a3c2db 3px, transparent 3px);
+            /* TRẠNG THÁI 1 (LỖI): Nền đen, lưới xanh lá kiểu hacker/hệ thống */
+            background-color: #050505; 
+            background-image: 
+              linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px);
             background-size: 30px 30px;
             display: flex;
             justify-content: center;
@@ -17,6 +19,14 @@
             margin: 0;
             font-family: 'MS Sans Serif', Tahoma, sans-serif;
             overflow: hidden;
+            transition: background-color 0.8s ease, background-image 0.8s ease; /* Hiệu ứng chuyển cảnh mượt */
+        }
+
+        /* TRẠNG THÁI 2 (VUI TƯƠI): Sẽ được JS thêm vào sau khi click */
+        body.happy-mode {
+            background-color: #dbe9f4; 
+            background-image: radial-gradient(#a3c2db 3px, transparent 3px);
+            background-size: 30px 30px;
         }
 
         /* Giao diện cửa sổ retro Win999 */
@@ -28,9 +38,14 @@
             border-bottom: 3px solid #000000;
             width: 90%;
             max-width: 450px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
             z-index: 10;
             animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transition: box-shadow 0.8s ease;
+        }
+
+        body.happy-mode .win-window {
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.15); /* Giảm bóng đen xì khi sang nền sáng */
         }
 
         @keyframes popUp {
@@ -38,7 +53,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Thanh tiêu đề cửa sổ */
         .title-bar {
             background: linear-gradient(90deg, #000080, #1084d0);
             color: white;
@@ -50,7 +64,6 @@
             align-items: center;
         }
 
-        /* Nút X đóng cửa sổ */
         .close-btn {
             background: #c0c0c0;
             color: black;
@@ -73,7 +86,6 @@
             border-bottom: 2px solid #ffffff;
         }
 
-        /* Nội dung cảnh báo */
         .content {
             padding: 25px 20px;
             display: flex;
@@ -91,7 +103,6 @@
             color: #000;
         }
 
-        /* Nút bấm retro */
         .btn-container {
             text-align: center;
             padding-bottom: 20px;
@@ -104,87 +115,4 @@
             border-right: 2px solid #000000;
             border-bottom: 2px solid #000000;
             padding: 8px 35px;
-            font-family: 'MS Sans Serif', Tahoma, sans-serif;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            outline: none;
-        }
-
-        button:active {
-            border-top: 2px solid #000000;
-            border-left: 2px solid #000000;
-            border-right: 2px solid #ffffff;
-            border-bottom: 2px solid #ffffff;
-        }
-
-        /* Hiệu ứng rơi */
-        .falling-item {
-            position: absolute;
-            top: -10vh;
-            font-size: 24px;
-            animation: fall linear forwards;
-            z-index: 1;
-            opacity: 0.9;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Cửa sổ hệ điều hành -->
-    <div class="win-window">
-        <div class="title-bar">
-            <span>⚠️ C:\WIN999\SYSTEM_ALERT.EXE</span>
-            <div class="close-btn" onclick="fakeError()">X</div>
-        </div>
-        <div class="content">
-            <!-- Icon cảnh báo -->
-            <div class="icon">⚠️</div>
-            <div class="message">
-                <strong>LỖI HỆ THỐNG NGHIÊM TRỌNG!</strong><br><br>
-                Hệ điều hành <i>Win999</i> phát hiện <b> unknown user </b> đang sử dụng thiết bị này.<br><br>
-                Yêu cầu nhận ngay lời chúc 20/10 để khôi phục! 
-            </div>
-        </div>
-        <div class="btn-container">
-            <button onclick="fakeError()">[ Yass ]</button>
-        </div>
-    </div>
-
-    <script>
-        function createFallingItem() {
-            const item = document.createElement('div');
-            item.classList.add('falling-item');
-            
-            // Trộn lẫn hoa và các icon máy tính cổ điển cho đúng concept Win999
-            const icons = ['🌸', '🌺', '💾', '💖', '✨', '💻', '💌'];
-            item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            
-            item.style.left = Math.random() * 100 + 'vw';
-            item.style.animationDuration = Math.random() * 3 + 3 + 's';
-            item.style.fontSize = Math.random() * 15 + 15 + 'px';
-
-            document.body.appendChild(item);
-
-            setTimeout(() => {
-                item.remove();
-            }, 6000);
-        }
-
-        // Tạo cơn mưa icon rơi liên tục
-        setInterval(createFallingItem, 300);
-
-        // Hiệu ứng khi bấm vào nút OK hoặc nút X
-        function fakeError() {
-            alert("Tiến trình cài đặt đã đạt 100%.\nChúc 20/10 vui vẻ :P");
-            // Tăng tốc độ rơi của hoa sau khi bấm nút
-            setInterval(createFallingItem, 100);
-        }
-    </script>
-
-</body>
-</html>
+            font
