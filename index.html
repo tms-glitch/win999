@@ -22,7 +22,7 @@
             transition: background-color 0.8s ease, background-image 0.8s ease;
         }
 
-        /* TRẠNG THÁI 2 (VUI TƯƠI): Được đổi khi click */
+        /* TRẠNG THÁI 2 (VUI TƯƠI): Được đổi màu khi click */
         body.happy-mode {
             background-color: #dbe9f4; 
             background-image: radial-gradient(#a3c2db 3px, transparent 3px);
@@ -167,18 +167,6 @@
     <script>
         let isActivated = false;
 
-        // Hàm bật chế độ Toàn màn hình
-        function goFullScreen() {
-            let elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen().catch(() => {});
-            } else if (elem.webkitRequestFullscreen) { /* Safari / Chrome cổ */
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE11 */
-                elem.msRequestFullscreen();
-            }
-        }
-
         function createFallingItem() {
             const item = document.createElement('div');
             item.classList.add('falling-item');
@@ -198,47 +186,32 @@
         }
 
         function fakeError() {
-            // Tự động bật Toàn màn hình ngay khi người dùng tương tác click
-            goFullScreen();
-
             if (isActivated) return;
             isActivated = true;
 
+            // Đổi màu nền sang xanh pastel
             document.body.classList.add('happy-mode');
 
             setTimeout(() => {
                 alert("Tiến trình cài đặt đã đạt 100%.\nChúc 20/10 vui vẻ :P");
                 
+                // Thả hoa rơi liên tục
                 setInterval(createFallingItem, 150);
 
+                // Cập nhật giao diện cửa sổ
                 document.getElementById('windowTitle').innerText = "💖 C:\\WIN999\\HAPPINESS.EXE";
                 document.getElementById('windowIcon').innerText = "🌸";
-                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!<br><br>Chúc mừng 20/10 nha! 🎉";
+                document.getElementById('windowMessage').innerHTML = "<strong>ĐÃ KHÔI PHỤC HỆ THỐNG!</strong><br><br>Gửi đến <b>unknown user</b> ngàn nụ hoa và sự vui vẻ.<br><br>Chúc mừng 20/10 nha! 🎉";
                 
+                // Đổi nút bấm thành [ Hoàn tất ]
                 const btn = document.getElementById('actionBtn');
                 btn.innerText = "[ Hoàn tất ]";
-                btn.onclick = closeCard;
+                
+                // Khi bấm Hoàn tất -> Ẩn cửa sổ đi để người dùng ngắm màn hình hoa rơi
+                btn.onclick = function() {
+                    document.getElementById('mainWindow').style.display = 'none';
+                };
             }, 300);
-        }
-
-        // Hàm xử lý việc đóng tab / đóng ứng dụng
-        function closeCard() {
-            // Thử tự đóng tab
-            window.open('', '_self', '');
-            window.close();
-
-            // Nếu trình duyệt chặn không cho đóng tab, hiển thị màn hình tắt nguồn vui vẻ
-            setTimeout(() => {
-                document.body.className = ''; // Xóa nền sáng
-                document.body.style.backgroundColor = '#000000';
-                document.body.style.backgroundImage = 'none';
-                document.body.innerHTML = `
-                    <div style="color: #00ff00; text-align: center; font-family: 'MS Sans Serif', Tahoma, sans-serif; z-index: 100;">
-                        <h1 style="font-size: 28px; margin-bottom: 10px;">SYSTEM SHUTDOWN SUCCESSFUL! 🌸</h1>
-                        <p style="color: #ffffff; font-size: 16px;">Hệ thống Win999 đã tắt an toàn. Bạn có thể tự đóng tab này nhé! ❤️</p>
-                    </div>
-                `;
-            }, 200);
         }
     </script>
 
