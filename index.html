@@ -17,7 +17,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 0;
+            padding: 20px 0 60px 0; /* Padding dưới để không bị thanh chạy chữ che */
             box-sizing: border-box;
             font-family: 'MS Sans Serif', Tahoma, sans-serif;
             overflow-x: hidden;
@@ -111,9 +111,9 @@
             color: #000;
         }
 
-        /* Khung nhạc Spotify Embed kiểu retro */
+        /* Khung nhạc Spotify Embed */
         .spotify-container {
-            display: none; /* Ẩn ban đầu, chỉ hiện sau khi nhấn Yass */
+            display: none;
             margin-top: 5px;
             background: #a0a0a0;
             padding: 8px;
@@ -213,6 +213,36 @@
         @keyframes fall {
             to { transform: translateY(110vh) rotate(360deg); }
         }
+
+        /* THANH LỜI CHÚC CHẠY CHỮ NỔI BẬT Ở CHÂN MÀN HÌNH */
+        .bottom-ticker-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #e6005c; /* Màu hồng neon rực rỡ */
+            border-top: 3px solid #ffcc00; /* Viền vàng nổi bật */
+            color: #ffffff;
+            padding: 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 999;
+            box-shadow: 0 -4px 15px rgba(230, 0, 92, 0.4);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+        }
+
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 22s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
     </style>
 </head>
 <body>
@@ -233,14 +263,11 @@
                 </div>
             </div>
 
-            <!-- Trình phát nhạc Spotify & Mã QR (Xuất hiện sau khi bấm nút) -->
+            <!-- Trình phát nhạc Spotify & Mã QR -->
             <div class="spotify-container" id="spotifyBox">
                 <div class="spotify-title">🎵 WIN999 MEDIA PLAYER - BẢN NHẠC DÀNH TẶNG BẠN</div>
-                
-                <!-- Trình phát Spotify nhúng -->
                 <iframe class="spotify-iframe" src="https://open.spotify.com/embed/track/6IHLOkgZftkcqS3fM0jMCT?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 
-                <!-- Mã QR & Link Spotify -->
                 <div class="qr-section">
                     <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://open.spotify.com/track/6IHLOkgZftkcqS3fM0jMCT" alt="Spotify QR Code">
                     <div class="qr-text">
@@ -255,6 +282,13 @@
         </div>
     </div>
 
+    <!-- THANH NGHỆ THUẬT CHẠY CHỮ QUẢNG CÁO NỔI BẬT -->
+    <div class="bottom-ticker-bar">
+        <div class="ticker-content">
+            🌸 Gửi các bạn nữ trước màn hình — Nhân ngày 20/10, Phương chúc bạn luôn vui vẻ, xinh đẹp, học hành thuận lợi và gặp nhiều may mắn nhé! Chúc bạn có một ngày 20/10 thật vui và nhận được thật nhiều quà. Happy Women’s Day! 🎉✨💖
+        </div>
+    </div>
+
     <script>
         let isActivated = false;
 
@@ -262,7 +296,6 @@
             const item = document.createElement('div');
             item.classList.add('falling-item');
             
-            // Thêm emoji nốt nhạc rơi cùng hoa
             const icons = ['🌸', '🌺', '💖', '✨', '💌', '🎉', '🎵'];
             item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             
@@ -302,7 +335,7 @@
                 const btn = document.getElementById('actionBtn');
                 btn.innerText = "[ Hoàn tất ]";
                 
-                // Khi bấm Hoàn tất -> Ẩn cửa sổ để ngắm màn hình hoa rơi
+                // Khi bấm Hoàn tất -> Ẩn cửa sổ chính để ngắm màn hình hoa rơi + dòng chữ chạy
                 btn.onclick = function() {
                     document.getElementById('mainWindow').style.display = 'none';
                 };
